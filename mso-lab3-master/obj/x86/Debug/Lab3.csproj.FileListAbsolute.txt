@@ -1,0 +1,5 @@
+D:\robin\mso-lab3-master\bin\Debug\Lab3.exe
+D:\robin\mso-lab3-master\bin\Debug\Lab3.pdb
+D:\robin\mso-lab3-master\obj\x86\Debug\Lab3.csprojResolveAssemblyReference.cache
+D:\robin\mso-lab3-master\obj\x86\Debug\Lab3.exe
+D:\robin\mso-lab3-master\obj\x86\Debug\Lab3.pdb
