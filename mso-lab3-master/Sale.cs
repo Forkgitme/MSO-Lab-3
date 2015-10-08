@@ -8,8 +8,8 @@ namespace Lab3
 {
     class Sale
     {
-        string date = "9-10-2015";
-        Ticket t;
+        private string date = "9-10-2015";
+        private Ticket t;
 
         public void PrintReceipt(string date, float price)
         {

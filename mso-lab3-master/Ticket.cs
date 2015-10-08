@@ -20,13 +20,7 @@ namespace Lab3
             ticketType = type;
             discount = disc;
             singleFare = single;
-            price = CalculatePrice(departure, destination, ticketType, discount, singleFare);
-        }
-
-        public float CalculatePrice(string departure, string destination, UIClass type, UIDiscount discount, bool single)
-        {
-            //We have no reason to extend CalculatePrice to the pricecalculator class as Ticket is already the information expert
-            return PriceCalculator.Calculate(departure, destination, type, discount, single);
+            price = PriceCalculator.Calculate(departure, destination, ticketType, discount, singleFare);
         }
     }
 

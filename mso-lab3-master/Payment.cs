@@ -41,8 +41,8 @@ namespace Lab3
 
     class CreditPayment : Payment
     {
-        CreditCard c;
-        int id;
+        private CreditCard c;
+        private int id;
 
         public CreditPayment()
         {
@@ -69,8 +69,8 @@ namespace Lab3
 
     class DebitPayment : Payment
     {
-        DebitCard d;
-        int id;
+        private DebitCard d;
+        private int id;
 
         public DebitPayment()
         {
