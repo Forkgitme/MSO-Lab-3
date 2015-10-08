@@ -7,27 +7,32 @@ namespace Lab3
 {
     class Ticket
     {
-        public bool dueToday;
         public string departure, destination;
         public float price;
         public UIClass ticketType;
         public UIDiscount discount;
+        public bool singleFare;
 
-        public Ticket()
+        public Ticket(string dep, string dest, UIClass type, UIDiscount disc, bool single)
         {
-
+            departure = dep;
+            destination = dest;
+            ticketType = type;
+            discount = disc;
+            singleFare = single;
+            price = CalculatePrice(departure, destination, ticketType, discount, singleFare);
         }
 
-        public float CalculatePrice(string departure, string destination, UIClass type, UIDiscount discount)
+        public float CalculatePrice(string departure, string destination, UIClass type, UIDiscount discount, bool single)
         {
             //We have no reason to extend CalculatePrice to the pricecalculator class as Ticket is already the information expert
-            return PriceCalculator.Calculate(departure, destination, type, discount);
+            return PriceCalculator.Calculate(departure, destination, type, discount, single);
         }
     }
 
     public static class PriceCalculator
     {
-        public static float Calculate(string departure, string destination, UIClass type, UIDiscount discount)
+        public static float Calculate(string departure, string destination, UIClass type, UIDiscount discount, bool singleFare)
         {
             float ret = 0;
             int tariefeenheden = Tariefeenheden.getTariefeenheden(departure, destination);
@@ -40,7 +45,9 @@ namespace Lab3
                     ret = SecondClassCalculator.Calculate(tariefeenheden, discount);
                     break;
             }
-            return ret;
+
+            if (singleFare) { return ret; }
+            else { return ret * 2; }
         }
     }
 
@@ -53,13 +60,13 @@ namespace Lab3
             {
                 default:
                 case UIDiscount.NoDiscount:
-                    col = 4;
+                    col = 3;
                     break;
                 case UIDiscount.TwentyDiscount:
-                    col = 5;
+                    col = 4;
                     break;
                 case UIDiscount.FortyDiscount:
-                    col = 6;
+                    col = 5;
                     break;
             }
 
@@ -76,13 +83,13 @@ namespace Lab3
             {
                 default:
                 case UIDiscount.NoDiscount:
-                    col = 1;
+                    col = 0;
                     break;
                 case UIDiscount.TwentyDiscount:
-                    col = 2;
+                    col = 1;
                     break;
                 case UIDiscount.FortyDiscount:
-                    col = 3;
+                    col = 2;
                     break;
             }
 

@@ -7,9 +7,9 @@ namespace Lab3
 {
     abstract class Payment
     {
-        void BeginTransaction(float Price){}
-        bool EndTransaction() { return true; }
-        void CancelTransaction() { }
+        public virtual void BeginTransaction(float Price){}
+        public virtual bool EndTransaction() { return true; }
+        public virtual void CancelTransaction() { }
     }
 
     class CashPayment : Payment
@@ -21,19 +21,19 @@ namespace Lab3
             coin = new IKEAMyntAtare2000();
         }
 
-        public void BeginTransaction(float price)
+        public override void BeginTransaction(float price)
         {
             coin.starta();
             coin.betala((int)Math.Round(price * 100));
         }
 
-        public bool EndTransaction()
+        public override bool EndTransaction()
         {
             coin.stoppa();
             return true;
         }
 
-        public void CancelTransaction()
+        public override void CancelTransaction()
         {
             coin.stoppa();
         }
@@ -49,19 +49,19 @@ namespace Lab3
             c = new CreditCard();
         }
 
-        public void BeginTransaction(float price)
+        public override void BeginTransaction(float price)
         {
             c.Connect();
             //50 cent extra charge for creditcards
             id = c.BeginTransaction(price + 0.50f);
         }
 
-        public bool EndTransaction()
+        public override bool EndTransaction()
         {
             return c.EndTransaction(id);
         }
 
-        public void CancelTransaction()
+        public override void CancelTransaction()
         {
             c.CancelTransaction(id);
         }
@@ -77,18 +77,18 @@ namespace Lab3
             d = new DebitCard();
         }
 
-        public void BeginTransaction(float price)
+        public override void BeginTransaction(float price)
         {
             d.Connect();
             id = d.BeginTransaction(price);
         }
 
-        public bool EndTransaction()
+        public override bool EndTransaction()
         {
             return d.EndTransaction(id);
         }
 
-        public void CancelTransaction()
+        public override void CancelTransaction()
         {
             d.CancelTransaction(id);
         }

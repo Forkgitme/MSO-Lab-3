@@ -25,65 +25,72 @@ namespace Lab3
 
 		private void handlePayment(UIInfo info)
 		{
-			// *************************************
-			// This is the code you need to refactor
-			// *************************************
+            Sale s = new Sale();
 
-			// Get number of tariefeenheden
-			int tariefeenheden = Tariefeenheden.getTariefeenheden (info.From, info.To);
+            s.CreateTicket(info.From, info.To, info.Class, info.Discount, (info.Way == UIWay.OneWay));
+            s.ProcessPayment(info);
+            s.PrintTicket();
+            s.PrintReceipt();
 
-			// Compute the column in the table based on choices
-			int tableColumn;
-			// First based on class
-			switch (info.Class) {
-			case UIClass.FirstClass:
-				tableColumn = 3;
-				break;
-			default:
-				tableColumn = 0;
-				break;
-			}
-			// Then, on the discount
-			switch (info.Discount) {
-			case UIDiscount.TwentyDiscount:
-				tableColumn += 1;
-				break;
-			case UIDiscount.FortyDiscount:
-				tableColumn += 2;
-				break;
-			}
+			//// *************************************
+			//// This is the code you need to refactor
+			//// *************************************
 
-			// Get price
-			float price = PricingTable.getPrice (tariefeenheden, tableColumn);
-			if (info.Way == UIWay.Return) {
-				price *= 2;
-			}
-			// Add 50 cent if paying with credit card
-			if (info.Payment == UIPayment.CreditCard) {
-				price += 0.50f;
-			}
+			//// Get number of tariefeenheden
+			//int tariefeenheden = Tariefeenheden.getTariefeenheden (info.From, info.To);
 
-			// Pay
-			switch (info.Payment) {
-			case UIPayment.CreditCard:
-				CreditCard c = new CreditCard ();
-				c.Connect ();
-				int ccid = c.BeginTransaction (price);
-				c.EndTransaction (ccid);
-				break;
-			case UIPayment.DebitCard:
-				DebitCard d = new DebitCard ();
-				d.Connect ();
-				int dcid = d.BeginTransaction (price);
-				d.EndTransaction (dcid);
-				break;
-			case UIPayment.Cash:
-				IKEAMyntAtare2000 coin = new IKEAMyntAtare2000 ();
-				coin.starta ();
-				coin.betala ((int) Math.Round(price * 100));
-				coin.stoppa ();
-				break;
-			}
+			//// Compute the column in the table based on choices
+			//int tableColumn;
+			//// First based on class
+			//switch (info.Class) {
+			//case UIClass.FirstClass:
+			//	tableColumn = 3;
+			//	break;
+			//default:
+			//	tableColumn = 0;
+			//	break;
+			//}
+			//// Then, on the discount
+			//switch (info.Discount) {
+			//case UIDiscount.TwentyDiscount:
+			//	tableColumn += 1;
+			//	break;
+			//case UIDiscount.FortyDiscount:
+			//	tableColumn += 2;
+			//	break;
+			//}
+
+			//// Get price
+			//float price = PricingTable.getPrice (tariefeenheden, tableColumn);
+			//if (info.Way == UIWay.Return) {
+			//	price *= 2;
+			//}
+			//// Add 50 cent if paying with credit card
+			//if (info.Payment == UIPayment.CreditCard) {
+			//	price += 0.50f;
+			//}
+
+			//// Pay
+			//switch (info.Payment) {
+			//case UIPayment.CreditCard:
+			//	CreditCard c = new CreditCard ();
+			//	c.Connect ();
+			//	int ccid = c.BeginTransaction (price);
+			//	c.EndTransaction (ccid);
+			//	break;
+			//case UIPayment.DebitCard:
+			//	DebitCard d = new DebitCard ();
+			//	d.Connect ();
+			//	int dcid = d.BeginTransaction (price);
+			//	d.EndTransaction (dcid);
+			//	break;
+			//case UIPayment.Cash:
+			//	IKEAMyntAtare2000 coin = new IKEAMyntAtare2000 ();
+			//	coin.starta ();
+			//	coin.betala ((int) Math.Round(price * 100));
+			//	coin.stoppa ();
+			//	break;
+			//}
 		}
 
 #region Set-up -- don't look at it
