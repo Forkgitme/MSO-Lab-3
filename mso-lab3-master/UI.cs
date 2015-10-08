@@ -30,7 +30,6 @@ namespace Lab3
             s.CreateTicket(info.From, info.To, info.Class, info.Discount, (info.Way == UIWay.OneWay));
             s.ProcessPayment(info);
             s.PrintTicket();
-            s.PrintReceipt();
 
 			//// *************************************
 			//// This is the code you need to refactor

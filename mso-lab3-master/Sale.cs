@@ -10,11 +10,10 @@ namespace Lab3
     {
         string date = "9-10-2015";
         Ticket t;
-        Payment p;
 
-        public void PrintReceipt()
+        public void PrintReceipt(string date, float price)
         {
-            MessageBox.Show("Date: " + date + " Price: " + t.price);
+            MessageBox.Show("Date: " + date + " Price: " + price);
         }
 
         public void PrintTicket()
@@ -35,6 +34,7 @@ namespace Lab3
         public void ProcessPayment(UIInfo info)
         {
             Payment p;
+            float tprice = t.price;
 
             switch (info.Payment)
             {
@@ -44,6 +44,7 @@ namespace Lab3
                     break;
                 case UIPayment.CreditCard:
                     p = new CreditPayment();
+                    tprice += 0.5f;
                     break;
                 case UIPayment.DebitCard:
                     p = new DebitPayment();
@@ -56,6 +57,7 @@ namespace Lab3
             if (b) { MessageBox.Show("Your payment has been processed succesfully."); }
             else { MessageBox.Show("Your payment was not processed."); }
             WriteToLog();
+            PrintReceipt(date, tprice);
         }
     }
 }
